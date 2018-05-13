@@ -1,0 +1,16 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Questionnaire - payment
+{% endblock %}
+
+{% block content %}
+
+Now please roll your dice once and enter the number that you roll. The number will be multiplied by <b>{{ Constants.die_conversion }}</b> to get your payment for the module.
+
+{% formfield player.die_roll label=""%}
+
+    {% next_button %}
+
+{% endblock %}

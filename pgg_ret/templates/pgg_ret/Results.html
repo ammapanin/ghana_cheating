@@ -1,0 +1,63 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree humanize %}
+
+{% block title %}
+    Results. Round {{ view.round_number }} of {{ Constants.num_rounds }}
+{% endblock %}
+
+{% block content %}
+
+
+<table class="table table-hover table-striped">
+    <tr>
+        <td>Number of correct answers: </td>
+        <td>{{ player.num_tasks_correct }}</td>
+    </tr>
+     
+    <tr>
+        <td> Total earnings:</td>
+        <td> {{ player.ret_earning|intcomma }}</td>
+    </tr>
+
+    <tr>
+        <td> Declared earnings:</td>
+        <td> {{ player.declaration }}</td>
+    </tr>
+    <tr class="{{ player.is_checked|yesno:'table-danger,' }}">
+        <td> Audit:</td>
+        <td> {{ player.is_checked|yesno:'You have been audited!,You have not been audited' }}</td>
+    </tr>
+    {% if player.is_checked %}
+
+    <tr class="{{ player.is_checked|yesno:'table-warning,' }}">
+        <td> Deduction:</td>
+        <td> {{ player.deduction}}</td>
+    </tr>
+    <tr class="{{ player.is_checked|yesno:'table-warning,' }}">
+        <td> Fine:</td>
+        <td> {{ player.fine}}</td>
+    </tr>
+    {% endif %}
+    <tr>
+        <td> Total deduction:</td>
+        <td> {{ total_deduction}}</td>
+    </tr>
+    <tr>
+        <td> Earnings after deduction:</td>
+        <td> {{ player.earnings_after_deduction }}</td>
+    </tr>
+    <tr>
+        <td> Amount received from pooled deduction:</td>
+        <td> {{ group.individual_share}}</td>
+    </tr>
+    <tr class="table-dark">
+        <th> Profit of this round:</th>
+        <th> {{ player.payoff }}</th>
+    </tr>
+
+
+</table> 
+
+{% next_button %}
+
+{% endblock %}

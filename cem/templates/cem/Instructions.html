@@ -1,0 +1,59 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+{% load i18n %}
+
+
+{# ****************************************************************************************************************** #}
+{# *** STYLES *** #}
+{# ****************************************************************************************************************** #}
+{% block styles %}
+    <link href="{% static 'cem/css/custom.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+
+{# ****************************************************************************************************************** #}
+{# *** TITLE *** #}
+{# ****************************************************************************************************************** #}
+{% block title %}
+    Module {{Constants.show_app_name}} - Instructions
+{% endblock %}
+
+
+{# ****************************************************************************************************************** #}
+{# *** CONTENT *** #}
+{# ****************************************************************************************************************** #}
+{% block content %}
+
+<ul>
+        <li class="list-group-item">
+                In the following, you'll face {{ Constants.num_choices }} decisions listed on your screen. Each decision is a paired
+                choice between "Option A" and "Option B". You will make {{ n }} choices and record these in the
+                middle column, but only one of them will be randomly picked in the end to determine your earnings.
+
+</li>
+        <li class="list-group-item">
+            {% blocktrans trimmed with hi=lottery_hi lo=lottery_lo p=probability %}
+                Option A is a lottery that pays {{ lottery_hi }} with {{ p }} probability and {{ lottery_lo }} otherwise.
+                "Option B" yields a varying payoff for sure, i.e. with a probability of 100%.
+            {% endblocktrans %}
+        </li>
+        <li class="list-group-item">
+            {% blocktrans trimmed with n=Constants.num_choices %}
+                After you have made all of your choices, one of the {{ n }} decisions will be randomly chosen for
+                your payment. If you chose to opt for "Option A" in this decision, it will be randomly determined
+                whether the low or high payoff will constitute your payoff; if you chose to opt for "Option B", the
+                respective sure amount will constitute your payoff.
+            {% endblocktrans %}
+        </li>
+        <li class="list-group-item">
+            {% blocktrans trimmed with n=num_choices %}
+                Even though you will make {{ n }} decisions, only one of these will end up affecting your earnings,
+                but you will not know in advance which decision will be used. Obviously, each decision has an equal
+                chance of being used in the end.
+            {% endblocktrans %}
+        </li>
+        <br/>
+            </ul>
+
+    {% next_button %}
+{% endblock %}

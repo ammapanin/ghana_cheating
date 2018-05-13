@@ -1,0 +1,66 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+        Module {{Constants.show_app_name}} - Instructions
+{% endblock %}
+
+{% block content %}
+
+<ul>
+  <li class="list-group-item">
+    Thank you for taking part in this
+    study. We would like to invite others to
+    do the same, and we would like to
+    request you to recommend some other
+    people to take part in future studies.
+  </li>
+  <li class="list-group-item">
+    In particular, we would like you to recommend people
+    who fit the following demographics: <b>{{demographics}}</b>.
+    Recommendations that do not fit these demographics will not be
+    considered valid.
+  </li>
+  <li class="list-group-item">
+    You will be paid for the recommendations that you
+    make. Your payment will be
+    {% if treatment == "flat"%}
+    a flat rate of <b>{{ flat_fee }}</b>.
+    {% endif %}
+    {% if treatment == "variable"%}
+    <b>{{ per_phone_fee }}</b> for every person that you recommend.
+    {% endif %}
+  </li>
+  
+  <li class="list-group-item">
+    For each person, we ask that you give us
+    their name, phone number, and the area
+    of Accra where they live. We request
+    that you acquire their consent before
+    supplying their names.
+  </li>
+  
+   <li class="list-group-item">
+  You will now have <b>{{time_minutes}} minutes</b> to gather as many names as you
+  can. Feel free to take out your phone and call people to verify
+  their details and consent.
+    </li>
+</ul>
+	  	  
+{% next_button %}
+
+{% endblock %}
+	  
+{% block styles %}
+	  <style>
+	    table, th, td {
+	    padding: 15px;
+	    border: 1px solid #ddd;
+	    }
+	    tr {
+	    background: #F5F5F5
+	    }
+	    
+	  </style>
+{% endblock %}
+	      

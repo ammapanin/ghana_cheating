@@ -1,0 +1,18 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+
+<h5>You have now completed {{n_rounds_audit}} rounds.
+  <br>
+For the next {{n_rounds_audit}} round{{n_rounds_audit|pluralize}}, the
+probability of inspection will be {{audit_prob_2 | safe}}.</h5>
+
+    {{ player_role }}
+    {% next_button %}
+
+{% endblock %}

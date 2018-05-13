@@ -1,0 +1,29 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+{{ module_pay_name }}
+{% endblock %}
+
+{% block content %}
+
+In this module you were <em>{{ player_role }} </em>
+
+<br>
+<br>
+{% if player_role == 'Player 1' %}
+You chose to transfer
+{% endif %}
+{% if player_role == 'Player 2' %}
+Player 1 chose to transfer
+{% endif %}
+{{amount_sent}} of {{endowment}}
+
+<br>
+<br>
+Your final payout for this module is <b>{{payoff}}</b>
+<br>
+<br>
+{% next_button %}
+
+{% endblock %}

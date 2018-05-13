@@ -1,0 +1,58 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+Payments
+{% endblock %}
+
+{% block content %}
+
+
+<h6>Your total earnings for the experiment are as follows.</h6>
+
+<table class="table">
+    <tr>
+    <th>Participation fee</th>
+    <th>{{ participation }}</th>
+  </tr>
+  
+  <tr>
+    <th>Additional payments</th>
+        <th></th>
+  </tr>
+
+  {% for module in payoffs  %}
+  <tr>
+    {% for pay_detail in module %}
+      <td>
+	{{ pay_detail }}
+      </td>
+      {% endfor %}
+  </tr>
+  {% endfor %}
+  <tr>
+    <th>
+      Total additional payments
+    </th>
+    <th>
+      {{ total }}
+    </th>
+  </tr>
+
+</table>
+
+
+
+{% formfield player.payment_phone_1 label="You will receive the participation fee in cash now and the additional earnings via mobile money. Please indicate the phone number where you would like the money to be sent." %}
+
+
+{% formfield player.payment_phone_2 label="Please confirm your phone number." %}
+
+
+<h5>Please type your additional payment below to confirm the amount
+  that you will receive. In case of any disputes, please call**</h5>
+{% formfield player.payment_confirm label="I acknowledge that I will receive the amount typed below by mobile money transfer to the phone number I have supplied." %}
+
+{% next_button %}
+
+{% endblock %}

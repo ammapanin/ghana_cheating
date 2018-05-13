@@ -1,0 +1,27 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+{{ module_pay_name }}
+{% endblock %}
+
+{% block content %}
+
+In this module you recommended <em>{{n_phones}}</em> people.
+<br>
+<br>
+You were paid
+{% if treatment == 'flat' %}
+a flat fee of {{flat_pay}} for this task.
+{% endif %}
+{% if treatment == 'variable' %}
+ <em>{{per_phone_pay}}</em> for each recommendation.
+{% endif %}
+<br>
+<br>
+Your final payout for this module is <b>{{payoff}}</b>
+<br>
+<br>
+{% next_button %}
+
+{% endblock %}

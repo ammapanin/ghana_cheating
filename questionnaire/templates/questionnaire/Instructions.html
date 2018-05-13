@@ -1,0 +1,29 @@
+
+
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Module {{Constants.show_app_name}} - Instructions
+{% endblock %}
+
+{% block content %}
+<ul>
+  <li class="list-group-item">
+    In the module you will answer a few demographic questions. You will
+    also be paid for this model in an innovative way.
+  </li>
+  <li class="list-group-item">
+    You have been given a die. We will ask you to roll the die once. You
+    will be paid according to whichever number is facing upwards after your
+    first roll. Each dot on the upwards facing side of the die is
+    worth {{ Constants.die_conversion}}.
+  </li>
+  <li class="list-group-item">
+    So if you roll a 4, you will be paid {{example_4}} and if you roll
+    a 1, you will be paid {{example_1}}
+  </li>
+</ul>
+    {% next_button %}
+
+{% endblock %}

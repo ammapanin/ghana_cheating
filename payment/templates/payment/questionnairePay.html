@@ -1,0 +1,21 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+{{ module_pay_name }}
+{% endblock %}
+
+{% block content %}
+
+In this module you answered a questionnaire and you will be paid
+according to your die roll. You stated that you rolled {{ die_roll }}
+
+<br>
+<br>
+Your final payout for this module is {{die_roll}} x
+{{die_conversion}} = <b>{{payoff}}</b>
+<br>
+<br>
+{% next_button %}
+
+{% endblock %}

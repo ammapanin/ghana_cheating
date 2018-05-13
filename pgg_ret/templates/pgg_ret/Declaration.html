@@ -1,0 +1,19 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Declaration.  Round {{ view.round_number }} of {{ Constants.num_rounds }}
+{% endblock %}
+
+{% block content %}
+
+ 
+    <div>Number of correct answers: {{ player.num_tasks_correct }}</div>
+     
+    <div>Total earnings: {{ player.ret_earning }}</div>
+     
+    {% formfield player.declaration %}
+
+{% next_button %}
+
+{% endblock %}

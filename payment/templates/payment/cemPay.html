@@ -1,0 +1,98 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+{% load i18n %}
+
+{% block styles %}
+    <link href="{% static 'cem/css/custom.css' %}" rel="stylesheet">
+{% endblock %}
+
+
+{% block title %}
+    {{ module_pay_name }}
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="wrapper">
+
+      <div class="card info">
+        {% blocktrans trimmed %}
+        The following decision was randomly chosen for your payment:
+        {% endblocktrans %}
+      </div>
+      <br/>
+      
+      <div class="card">
+        <table class="table table-striped">
+          <thead>
+            <tr class="header">
+              <th class="lottery">{% trans "Option A" %}</th>
+              <th class="formfield"></th>
+              <th class="sure_payoff">{% trans "Option B" %}</th>
+            </tr>
+          </thead>
+	  
+          <tbody>
+            {% for i,f,p,hi,lo,sp in choice_to_pay %}
+            <tr>
+              <!-- lotteries -->
+	      <td class="lottery">
+		9/10 chance of {{ hi }} else {{lo}}
+              </td>
+	      
+              <td class="formfield">
+                {% if option_to_pay == 'A' %}
+                <div class="controls">
+                  <input type="radio"
+			 style="pointer-events: none;"
+			 checked="checked">
+                  <input type="radio" style="pointer-events: none;">
+                </div>
+                {% elif option_to_pay == 'B' %}
+                <div class="controls">
+                  <input type="radio"
+			 style="pointer-events: none;">
+                  <input type="radio"
+			 style="pointer-events: none;"
+			 checked="checked">
+                </div>
+                {% endif %}
+              </td>
+	      
+              <!-- sure payoff -->
+              <td class="sure_payoff">
+                {{ sp }} for sure
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+        <br/>
+
+        <!-- ------------------------------------------------------------------------------------------------------- -->
+        <!-- Payoff Information -->
+        <!-- ------------------------------------------------------------------------------------------------------- -->
+        <div class="card info">
+          {% if option_to_pay == "A" %}
+          <p>
+            {% blocktrans trimmed %}
+            For the lottery, one of the two possible outcomes has been
+            randomly realized based on the corresponding probabilities.
+            {% endblocktrans %}
+          </p>
+          {% endif %}
+	  
+          <p>
+            {% blocktrans trimmed with payoff=payoff %}
+            Your payoff in this task equals <b>{{ payoff }}</b>.
+            {% endblocktrans %}
+          </p>
+        </div>
+	
+    </div>
+    
+    {% next_button %}
+
+{% endblock %}

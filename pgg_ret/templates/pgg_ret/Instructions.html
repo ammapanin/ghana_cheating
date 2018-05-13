@@ -1,0 +1,138 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree humanize %}
+
+{% block title %}
+       Module {{Constants.show_app_name}} - Instructions
+{% endblock %}
+
+{% block content %}
+<ul>
+
+      <li class = "list-group-item">
+	In this module you will add a series of two-digit numbers to
+        earn money. Each correct addition will earn you {{ Constants.fee }}.
+	You will have 1 minute to add these numbers together.
+      </li>
+        <li class="list-group-item">
+	You will be completing this task as a group of
+	{{ Constants.players_per_group }} people. You have already been randomly
+	assigned to the group. Although your final payments will be jointly determined in this group, you will not be told the identity of the {{n_other_group_members}} other group members and they will not
+	know your identity.
+        </li>
+      <li class="list-group-item">
+	Your earnings and the earnings of your other group members
+        will be determined in the following way.<br>
+	<br>
+
+	<em>Firstly</em> you will have 1 minute to add as many numbers as
+        possible. Each correct addition will earn you {{ Constants.fee }}.
+
+	Whatever you have earned at the end of this minute will be
+	called your Preliminary Gains. These gains will be displayed
+	to you on the screen.
+      </li>
+      <li class="list-group-item">
+	<em>Secondly, </em> after you have seen your Preliminary Gains, you will be asked
+	to declare them to your group. The number you declare will be
+	called your Declared Gains.
+      </li>
+      
+      <li class="list-group-item">
+	The computer program will take <strong>{% widthratio Constants.tax_rate 1 100 %}%</strong> of your Declared
+        Gains and put them in a common pot. You will keep all your
+        Preliminary Gains that the computer has not taken.
+
+	The program will do the same thing for all your group
+            members. This means that the sum of the common pot will
+            consist of {% widthratio Constants.tax_rate 1 100 %}% of the Declared gains of each group member.
+      </li>
+
+      <li class="list-group-item">
+      
+	<em> Finally</em>, The total in the common pot will be redistributed equally
+	amongst the four group members i.e. each of you will get 1 /
+	{{Constants.players_per_group}} of the common pot regardless
+	of what you put in. Then your final earnings will be
+	calculated as <p class="payoff-equation">earningsGHS = Preliminary
+	Gains - {% widthratio Constants.tax_rate 1 100 %}% of Declared
+	Gains + redistribution from the Common Pot</p> 
+      </li>
+      
+        <li class="list-group-item">
+            You can declare any number you want as your
+            gains. However, in each round there is a probability that
+            your Declared Gains will be inspected and compared  with your actual
+            Preliminary Gains. If you are inspected, the computer will
+            automatically take <strong>{% widthratio Constants.tax_rate 1 100 %}%</strong> of your Preliminary Gains for the
+            common pot.
+        </li>
+	<li class="list-group-item">
+	    The inspection process will look at the
+            difference between your Declared Gains and your
+            Preliminary Gains. If declared less than your Preliminary
+            Gains, you will be punished. The punishment will be that you lose  <strong>{% widthratio Constants.fine_rate 1 100 %}%</strong> of the difference between your Declared Gains
+            and your Preliminary Gains. The chance that you will be
+            inspected is {{audit_prob_1 | safe}}. 
+        </li>
+<li class="list-group-item">
+If you are inspected and you declared less than your preliminary
+gains, your final earnings will be <p class="payoff-equation"earningsGHS>Preliminary
+	Gains - {% widthratio Constants.tax_rate 1 100 %}% of
+    Preliminary Gains
+	Gains + redistribution from the Common Pot - {% widthratio Constants.fine_rate 1 100 %}% of (Preliminary - Declared Gains)</p> 	
+ </li>         
+   <li class="list-group-item">
+      You will complete this process {{Constants.num_rounds}} times. You will always be playing with
+      the same group.
+
+      At the end of the experiment, one of the {{ Constants.num_rounds}} will be chosen at random and the computer will reveal whether
+      or not you were inspected. Your final earnings from the chosen round
+      will be added to your total earnings from the experiment. After
+      {{n_rounds_audit}} round{{n_rounds_audit|pluralize}}, the chances of inspection will
+      change to {{audit_prob_2 | safe}}.
+    </ul>
+    <div class="mt-3">
+        {% next_button %}
+    </div>
+{% endblock %}
+
+
+{% block styles %}
+    <style>
+      .tr:nth-child(even) {background: #CCC}
+      .tr:nth-child(odd) {background: #FFF}
+
+      ul {list-style-type: circle;
+      }
+      
+      .payoff-equation {
+      font-size: 95%;
+      min-width: 300px;
+      color: blue;
+      }
+      
+      .equation.stacked {
+      display: inline-block;
+      }
+      
+      .equation.stacked .number {
+      display: block;
+      margin-left: 1em;
+      text-align: right;
+      }
+      
+      .equation.stacked .operator {
+      float: left;
+      margin-right: 10px;
+      }
+      
+      .equation.stacked .equals {
+      display: block;
+      height: 0;
+      border-bottom: solid 1px black;
+      overflow: hidden;
+      margin-right: 10px;
+      }
+      
+    </style>
+{% endblock %}

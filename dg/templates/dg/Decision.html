@@ -1,0 +1,17 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Module 1 - Decision
+{% endblock %}
+
+{% block content %}
+If you are Player 1, how much of your {{Constants.endowment}} will you
+share with Player 2?
+
+<br>
+<br>
+    {% formfield player.dg_decision label=""%}
+    {% next_button %}
+
+{% endblock %}
