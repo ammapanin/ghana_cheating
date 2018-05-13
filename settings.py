@@ -37,7 +37,11 @@ LANGUAGE_CODE = 'en'
 REAL_WORLD_CURRENCY_CODE = 'GHS'
 USE_POINTS = False
 
-ROOMS = []
+ROOMS = [ {
+        'name': 'Legon',
+        'display_name': 'Legon sessions',
+}
+]
 
 
 # AUTH_LEVEL:
