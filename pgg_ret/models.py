@@ -17,9 +17,9 @@ doc = """
 
 class Constants(BaseConstants):
     name_in_url = 'pgg_ret'
-    players_per_group = 2
+    players_per_group = 4
     show_app_name = "Additions"
-    num_rounds = 2
+    num_rounds = 20
     switch_audit_round = int(round(num_rounds/2)) + 1
     task_time = 60
     lb = 30

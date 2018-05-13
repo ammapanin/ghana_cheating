@@ -23,7 +23,7 @@ class Constants(BaseConstants):
     num_rounds = 1
     flat_fee = c(5)
     per_phone_fee = c(0.5)
-    time = 10
+    time = 600
 
 
 class Subsession(BaseSubsession):
