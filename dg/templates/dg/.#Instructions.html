@@ -1,1 +1,0 @@
-ammapanin@Ammas-MBP.10901
