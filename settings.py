@@ -22,7 +22,7 @@ SESSION_CONFIGS = [
     #},
     {'name': 'dg',
      'display_name': "Ghana Experiments",
-     'num_demo_participants': 2,
+     'num_demo_participants': 4,
      'app_sequence': ["dg", "pgg_ret", "cem",
                       "phonesurvey", "questionnaire", "payment"]
     }
