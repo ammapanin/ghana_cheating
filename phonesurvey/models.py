@@ -60,6 +60,5 @@ class Phone(djmodels.Model):
     number = djmodels.BigIntegerField()
     name = models.StringField(label = "Name")
     residence = models.StringField(label = "Area of residence")
-    #agreement = models.BooleanField(label = "Agree to participate",
-    #                                widget=widgets.RadioSelect, )
+    #consent = models.BooleanField(label = "Agreed to participate")
 
