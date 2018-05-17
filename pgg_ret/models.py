@@ -28,8 +28,7 @@ class Constants(BaseConstants):
     # we filter out the numbers divisible by 5 to make
     # it a bit more complicated
     rchoices = [i for i in alldigs if i % 5 != 0]
-    fee = c(1)  # payment for correct answer
-    # set of probabilities to be checked (to define later)
+    fee = c(1)  # payment for each correct answer
     probs = [.0, 0.1]
     tax_rate = .1
     fine_rate = .5
@@ -44,6 +43,9 @@ class Subsession(BaseSubsession):
                 random.shuffle(probs)
                 p.participant.vars["prob_order"] = probs
 
+                pay_round = random.randint(1, Constants.num_rounds)
+                p.participant.vars["pay_round"] = pay_round
+                
             probs = p.participant.vars.get("prob_order")
             if self.round_number < Constants.switch_audit_round:
                 prob_ix = 0
@@ -54,7 +56,7 @@ class Subsession(BaseSubsession):
             r = random.random()
             if r < prob:
                 p.is_checked = True
-
+        
 class Group(BaseGroup):
     total_contribution = models.CurrencyField(
         doc='total contribs to the pool')
@@ -128,9 +130,12 @@ class Player(BasePlayer):
         deduct_assert = 'you should first set the deductions'
         assert self.group.total_contribution is not None, set_assert
         assert self.earnings_after_deduction is not None, deduct_assert
-        self.payoff = (self.earnings_after_deduction +
-                       self.group.individual_share)
-
+        if self.round_number == self.participant.vars["pay_round"]:
+            self.payoff = (self.earnings_after_deduction +
+                           self.group.individual_share)
+        else:
+            self.payoff = 0
+            
     @property
     def finished_tasks(self):
         return self.tasks.filter(answer__isnull=False)

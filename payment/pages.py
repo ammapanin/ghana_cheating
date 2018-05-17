@@ -81,8 +81,9 @@ class pggPay(Page):
         show_name =  "Module Results: {}"
         mod_pay_name = show_name.format(appC.show_app_name)
 
-        player = pgg_retPlayer.objects.get(participant=participant,
-                                           round_number=2)
+        pay_round = self.participant.vars["pay_round"]
+        player = pgg_retPlayer.objects.get(participant = participant,
+                                           round_number = pay_round)
         group = player.group
         
         return {'player': player,
