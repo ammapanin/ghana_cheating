@@ -38,8 +38,9 @@ REAL_WORLD_CURRENCY_CODE = 'GHS'
 USE_POINTS = False
 
 ROOMS = [ {
-        'name': 'Legon',
-        'display_name': 'Legon sessions',
+   'name': 'Legon',
+   'display_name': 'Legon sessions',
+   'participant_label_file': 'participant_label_file.txt'
 }
 ]
 
