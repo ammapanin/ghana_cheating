@@ -22,8 +22,8 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
     flat_fee = c(5)
-    per_phone_fee = c(0.5)
-    time = 600
+    per_phone_fee = c(1)
+    time = 900
 
 
 class Subsession(BaseSubsession):

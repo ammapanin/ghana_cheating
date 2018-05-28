@@ -9,7 +9,8 @@ from django.db.models import F
 import json
 import random
 
-author = 'Philipp Chapkovski, chapkovski@gmail.com'
+author = """Philipp Chapkovski, chapkovski@gmail.com
+"""
 
 doc = """
     multi-round real effort task + public good game (R.Duch)
@@ -19,8 +20,14 @@ class Constants(BaseConstants):
     name_in_url = 'pgg_ret'
     players_per_group = 4
     show_app_name = "Additions"
-    num_rounds = 20
-    switch_audit_round = int(round(num_rounds/2)) + 1
+    num_rounds = 10
+    ## Set the switch round to 0 if there will be only
+    ## one audit probability throughout the task
+    ## otherwise, switch halfway through
+    #switch_audit_round = int(round(num_rounds/2)) + 1
+    switch_audit_round = 0
+    probs = [.0]
+    
     task_time = 60
     lb = 30
     ub = 99
@@ -29,7 +36,6 @@ class Constants(BaseConstants):
     # it a bit more complicated
     rchoices = [i for i in alldigs if i % 5 != 0]
     fee = c(1)  # payment for each correct answer
-    probs = [.0, 0.1]
     tax_rate = .1
     fine_rate = .5
     pgg_factor = 1
@@ -48,11 +54,12 @@ class Subsession(BaseSubsession):
                 
             probs = p.participant.vars.get("prob_order")
             if self.round_number < Constants.switch_audit_round:
-                prob_ix = 0
-            else:
                 prob_ix = 1
+            else:
+                prob_ix = 0
             prob = probs[prob_ix]
             p.audit_prob = prob
+            
             r = random.random()
             if r < prob:
                 p.is_checked = True

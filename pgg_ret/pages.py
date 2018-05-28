@@ -10,9 +10,10 @@ class Instructions(Page):
     
     def vars_for_template(self):
         n_other_group = Constants.players_per_group - 1
-        n_rounds_audit = Constants.switch_audit_round - 1
+        n_rounds_audit = max(0, Constants.switch_audit_round - 1)
         var_dic = {"n_other_group_members": n_other_group,
-                   "n_rounds_audit": n_rounds_audit}
+                   "n_rounds_audit": n_rounds_audit,
+                   "switch_audit": n_rounds_audit != 0}
         
         div_10 = [(p * 100) % 10 == 0 for p in Constants.probs]
         if sum(div_10) == len(div_10):

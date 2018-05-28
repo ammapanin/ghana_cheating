@@ -87,9 +87,9 @@ gains, your final earnings will be <p class="payoff-equation"earningsGHS>Prelimi
 
       At the end of the experiment, one of the {{ Constants.num_rounds}} will be chosen at random and the computer will reveal whether
       or not you were inspected. Your final earnings from the chosen round
-      will be added to your total earnings from the experiment. After
+      will be added to your total earnings from the experiment. {% if switch_audit %}After
       {{n_rounds_audit}} round{{n_rounds_audit|pluralize}}, the chances of inspection will
-      change to {{audit_prob_2 | safe}}.
+      change to {{audit_prob_2 | safe}}.{% endif %}
     </ul>
     <div class="mt-3">
         {% next_button %}
@@ -97,6 +97,7 @@ gains, your final earnings will be <p class="payoff-equation"earningsGHS>Prelimi
 {% endblock %}
 
 
+    
 {% block styles %}
     <style>
       .tr:nth-child(even) {background: #CCC}
